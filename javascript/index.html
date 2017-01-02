@@ -1,0 +1,76 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+
+  <title>Car Dealership</title>
+  <meta name="description" content="Car Dealership">
+  <meta name="author" content="Viktor Penelski">
+
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/libs/list.min.js"></script>
+  <script src="js/libs/jquery.min.js"></script>
+  <script src="js/mockcarservice.js"></script>
+  <script src="js/car.js"></script>
+  <script src="js/cars-repo.js"></script>
+</head>
+
+<body>
+<section>
+  <form>
+    <p>Add/Edit car:</p>
+    Model:<br>
+    <input type="text" id="model">
+    <br> Year:
+    <br>
+    <input type="text" id="year">
+    <br> Color:
+    <br>
+    <input type="text" id="color">
+    <br>
+    <input id="createCarButton" type="submit" value="Submit">
+  </form>
+  <form>
+    <input list="modelsSelect" name="modelSelect">
+    <datalist id="modelsSelect">
+    </datalist>
+    <input id="filter-by-model-btn" type="submit" value="Filter by model">
+  </form>
+  <form>
+    <input list="yearsSelect" name="yearSelect">
+    <datalist id="yearsSelect">
+    </datalist>
+    <input id="filter-by-year-btn" type="submit" value="Filter by year">
+  </form>
+  <form>
+    <input list="colorsSelect" name="colorSelect">
+    <datalist id="colorsSelect">
+    </datalist>
+    <input id="filter-by-color-btn" type="submit" value="Filter by color">
+  </form>
+</section>
+<section id="carsDiv">
+  <input id="list-search" class="search" placeholder="Search"/><br>
+  <button class="sort" data-sort="model">Sort by model</button>
+  <button class="sort" data-sort="year">Sort by year</button>
+  <button class="sort" data-sort="color">Sort by color</button>
+  <table id="cars">
+    <thead>
+    <tr>
+      <th>Model</th>
+      <th>Year</th>
+      <th>Color</th>
+      <th></th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody class="list"></tbody>
+  </table>
+</section>
+
+<script src="js/app.js"></script>
+</body>
+
+</html>
