@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        /*Write a program that implements the following functionality:
+        /*  Write a program that implements the following functionality:
         In a barn there are 10 chickens. Each chicken lays 1-3 eggs per week. Depending on the week type we have more
         or less eggs. E.g. in a “normal” week each chicken lays 1 eggs, during a “bad” week a chicken produces 0 egg
         and during a “good” week – a chicken produces 3 eggs. After 2 weeks the eggs hatch and becomes a chicken.
@@ -29,32 +29,38 @@ public class Main {
         …
         Each chicken and its children should be printed on the console. After you print the result, ask the user if he
         wants to save the information in a file. If so, save the information in human readable format
-        (text based, xml, json).*/
+        (text based, xml, json).   */
 
         ArrayList<Chicken> liveChicks = new ArrayList() {{
-            add(new Chicken("Chicken1", 2));
-            add(new Chicken("Chicken2", 3));
+            add(new Chicken("Chicken1", 1));
+            add(new Chicken("Chicken2", 1));
         }};
-        List<Chicken> newChicks = new ArrayList();
+        ArrayList<Chicken> newChicks = new ArrayList();
 
-        System.out.print("Enter week duration of the chicken farm simulation ");
+        System.out.print("Enter week duration of the chicken farm simulation: ");
         Scanner in = new Scanner(System.in);
-        int weekDuration = in.nextInt(), eggsWeek, test;
+        int weekDuration = in.nextInt(), eggsWeek;
 
-        for (int i = 0; i < weekDuration; i++) {
+        for ( int i = 0; i < weekDuration; i++ ) {
             eggsWeek = Chicken.eggsPerWeek();
+            liveChicks.addAll(newChicks);
+            newChicks.clear();
             Iterator<Chicken> iter = liveChicks.listIterator();
-            while (iter.hasNext()) {
-//                Chicken newOne = iter.next();
-                iter.next().setAge();
-                if (iter.next().getAge() <= 4 && iter.next().getAge() >= 2) {
-                    iter.next().lays(i + 1, eggsWeek);
-                    if (iter.next().eggs.get(0).age == i - 3)
-                        Chicken.eggChicken(iter.next(), newChicks);
+            while ( iter.hasNext() ) {
+                Chicken current = iter.next();
+                current.setAge();
+                if ( current.getAge() >= 2 && current.getAge() <= 4 ) {
+                    current.lays(i, eggsWeek);
+                    if ( current.eggs.get(0).getAge() == i - 2 )
+                        Chicken.eggToChicken(current, newChicks);
                 }
-                if (iter.next().getAge() > 4)
-                    iter.remove();
+//                if ( current.getAge() > 5 )
+//                    iter.remove();
             }
+        }
+        for ( int i = 0; i <liveChicks.size() ; i++ ) {
+
+            System.out.println(liveChicks.get(i).getName());
         }
 
     }

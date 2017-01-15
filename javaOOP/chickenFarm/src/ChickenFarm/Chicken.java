@@ -7,21 +7,24 @@ import java.util.Random;
 public class Chicken {
 
     public static class Eggs {
-        public int age;
+        private int age;
+
         private int count;
 
-        public Eggs(int age, int count) {
+        Eggs(int age, int count) {
             this.age = age;
             this.count = count;
         }
 
-        public int getCount() {
-            return count;
+        public int getAge() {
+            return age;
         }
-
     }
 
+    private int age;
+
     private String name;
+
     public List<Eggs> eggs;
 
     public int getAge() {
@@ -32,12 +35,14 @@ public class Chicken {
         ++this.age;
     }
 
-    private int age;
+    public String getName() {
+        return name;
+    }
 
     public Chicken(String name, int age) {
         this.name = name;
         this.age = age;
-        this.eggs = new ArrayList<Eggs>();
+        this.eggs = new ArrayList<>();
     }
 
     public void lays(int age, int eggs) {
@@ -47,14 +52,15 @@ public class Chicken {
     public static int eggsPerWeek() {
         Random randomGenerator = new Random();
         int eggsPerWeek = randomGenerator.nextInt(3);
-        if (eggsPerWeek == 2) eggsPerWeek = 3;
+        if ( eggsPerWeek == 2 ) eggsPerWeek = 3;
 
         return eggsPerWeek;
-
     }
 
-    public static void eggChicken(Chicken chick, List<Chicken> newChicks) {
-//        newChicks.add(chick.eggs.get(0));
+    public static void eggToChicken(Chicken chick, List<Chicken> newChicks) {
+        for ( int i = 0; i < chick.eggs.get(0).count; i++ ) {
+            newChicks.add(new Chicken(Integer.toHexString(chick.eggs.get(i).hashCode() + i), 0));
+        }
         chick.eggs.remove(0);
     }
 
